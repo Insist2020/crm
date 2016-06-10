@@ -307,4 +307,23 @@ public class MainController implements Initializable {
 		}
 	}
 	
+	@FXML
+	public void handleStatistika() {
+		try {
+			FXMLLoader loader = new FXMLLoader(); 
+			URL location = StatistikaController.class.getResource("../view/StatistikaView.fxml"); 
+			loader.setLocation(location); 
+			loader.setBuilderFactory(new JavaFXBuilderFactory()); 
+			Parent root = (Parent)loader.load(location.openStream()); 
+			StatistikaController controller = (StatistikaController)loader.getController();
+			Stage stage = new Stage(); 
+			stage.setTitle("Statistika");
+			stage.setScene(new Scene(root, 600, 300));
+			stage.show(); 
+			controller.setDijalogStage(stage);
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}
+	}
+	
 }

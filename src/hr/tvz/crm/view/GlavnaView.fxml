@@ -18,16 +18,14 @@
               <MenuItem mnemonicParsing="false" onAction="#doExit" text="Izlaz" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Klijenti">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleDodajNovogKlijenta" text="Dodaj klijenta" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Popravak">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleDodajNoviPopravak" text="Dodaj popravak" />
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Akcije">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleDodajNovogKlijenta" text="Dodaj novog klijenta" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleDodajNoviPopravak" text="Dodaj novi popravak" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleStatistika" text="Prikaži statistiku" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
