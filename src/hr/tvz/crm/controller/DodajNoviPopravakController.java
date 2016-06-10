@@ -50,6 +50,14 @@ public class DodajNoviPopravakController {
         	Popravak noviPopravak = new Popravak(nazivField.getText(), opisField.getText(), voziloField.getText(), Double.parseDouble(cijenaField.getText()), klijent.getId(), tip.getId());
         	try {
 				BazaPodataka.dodajNoviPopravak(noviPopravak);
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+	        	alert.setTitle("Popravak unesen!");
+	        	alert.setHeaderText(null);
+	        	alert.setContentText("Novi popravak je uspješno dodan u bazu!");
+	        	alert.showAndWait();
+	        	
+	            dijalogStage.close();
 			} catch (Exception e) {
 				Alert alert = new Alert(AlertType.WARNING);
         		alert.setTitle("Unos novog popravka");
@@ -60,13 +68,7 @@ public class DodajNoviPopravakController {
 				e.printStackTrace();
 			}
         	
-        	Alert alert = new Alert(AlertType.INFORMATION);
-        	alert.setTitle("Popravak unesen!");
-        	alert.setHeaderText(null);
-        	alert.setContentText("Novi popravak je uspješno dodan u bazu!");
-        	alert.showAndWait();
         	
-            dijalogStage.close();
         }		
     }
 	

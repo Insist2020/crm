@@ -21,6 +21,7 @@
       <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label alignment="BASELINE_LEFT" prefHeight="54.0" prefWidth="102.0" text="Novi popravak:" wrapText="true">
@@ -85,12 +86,12 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#handleOk" text="Dodaj" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+      <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#handleOk" text="Dodaj" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="30.0" right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="odustaniButton" mnemonicParsing="false" onAction="#handleCancel" text="Odustani" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+      <Button fx:id="odustaniButton" mnemonicParsing="false" onAction="#handleCancel" text="Odustani" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="30.0" right="80.0" />
          </GridPane.margin>
@@ -108,7 +109,6 @@
             <Insets left="20.0" />
          </padding>
       </Label>
-      <ComboBox prefWidth="150.0" />
       <ComboBox fx:id="tipComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets right="20.0" />

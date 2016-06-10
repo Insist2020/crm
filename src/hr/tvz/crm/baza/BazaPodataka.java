@@ -180,6 +180,8 @@ public class BazaPodataka {
 		preparedStatement.setString(3, noviPopravak.getVozilo());
 		preparedStatement.setDouble(4, noviPopravak.getCijena());
 		preparedStatement.setInt(5, noviPopravak.getIdKlijent());
+		preparedStatement.setInt(6, noviPopravak.getTip());
+		preparedStatement.setLong(7, Instant.now().getEpochSecond());
 		preparedStatement.executeUpdate();
 		
 		zatvoriVezuSBazom(connection);
