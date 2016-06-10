@@ -36,6 +36,8 @@ public class BazaPodataka {
 				dataSource.setServerName(bazaPodatakaUrl);
 				dataSource.setPort(port);
 				dataSource.setDatabaseName(baza);
+				dataSource.setUseUnicode(true);
+				dataSource.setEncoding("utf8");
 				veza = dataSource.getConnection();
 			}
 			catch(SQLException ex){

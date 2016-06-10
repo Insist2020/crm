@@ -57,6 +57,8 @@ public class MainController implements Initializable {
 	private TextField filterKlijentiField;
 	@FXML
 	private TextField filterPopravciField;
+	
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -70,8 +72,7 @@ public class MainController implements Initializable {
 		        super.updateItem(datum, empty);
 		        if (empty) {
 		            setText(null);
-		        } else {
-		        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		        } else {		        	
 		        	String formattedDtm = Instant.ofEpochSecond(datum).atZone(ZoneId.of("GMT+1")).format(formatter);
 		            setText(formattedDtm);
 		        }
@@ -148,6 +149,8 @@ public class MainController implements Initializable {
 				
 				String lowerCaseFilter = newValue.toLowerCase();
 				
+	        	String formattedDtm = Instant.ofEpochSecond(popravak.getDatum()).atZone(ZoneId.of("GMT+1")).format(formatter);
+				
 				if (popravak.getNaziv().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 } else if (popravak.getOpis().toLowerCase().contains(lowerCaseFilter)) {
@@ -156,7 +159,7 @@ public class MainController implements Initializable {
                     return true;
                 } else if (Double.toString(popravak.getCijena()).toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (popravak.getDatum().toString().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (formattedDtm.toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
 				
