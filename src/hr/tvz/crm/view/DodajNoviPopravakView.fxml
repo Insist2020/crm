@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane prefHeight="318.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.crm.controller.DodajNoviPopravakController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="NEVER" maxWidth="356.0" minWidth="115.0" prefWidth="115.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="508.0" minWidth="200.0" prefWidth="290.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="174.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label alignment="BASELINE_LEFT" prefHeight="54.0" prefWidth="102.0" text="Novi popravak:" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Klijent" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="Naziv" GridPane.rowIndex="3">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <TextField fx:id="nazivField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Opis" GridPane.rowIndex="4">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="Vozilo" GridPane.rowIndex="5">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="Cijena" GridPane.rowIndex="6">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <TextField fx:id="opisField" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="voziloField" GridPane.columnIndex="1" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="cijenaField" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </TextField>
+      <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#handleOk" text="Dodaj" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets bottom="30.0" right="20.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="odustaniButton" mnemonicParsing="false" onAction="#handleCancel" text="Odustani" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets bottom="30.0" right="80.0" />
+         </GridPane.margin>
+      </Button>
+      <ComboBox fx:id="klijentComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <Label text="Tip" GridPane.rowIndex="2">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <ComboBox prefWidth="150.0" />
+      <ComboBox fx:id="tipComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </ComboBox>
+   </children>
+</GridPane>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.input.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.crm.controller.MainController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Aplikacija">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#doExit" text="Izlaz" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Klijenti">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleDodajNovogKlijenta" text="Dodaj klijenta" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Popravak">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleDodajNoviPopravak" text="Dodaj popravak" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <Label text="Autor: Tomislav Bradač" />
+                  <Label text=" | " />
+                  <Label text="Mentor: dipl. ing. Aleksander Radovan" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <Label layoutY="1.0" text="Klijenti:">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="22.0" />
+                     </font></Label>
+                  <ListView fx:id="mainKlijentiListView" layoutY="35.0" onMouseClicked="#populatePopravciTable" prefHeight="521.0" prefWidth="197.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+                  <HBox layoutX="184.0" layoutY="5.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <TextField fx:id="filterKlijentiField" maxWidth="110.0" promptText="Filter">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#handleObrisiKlijenta" text="-">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="dodajNovogKlijentaBttn" mnemonicParsing="false" onAction="#handleDodajNovogKlijenta" text="+" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutY="1.0" text="Popravci:">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                     <font>
+                        <Font size="22.0" />
+                     </font></Label>
+                  <TableView fx:id="popravciTable" layoutY="35.0" prefHeight="521.0" prefWidth="595.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+                    <columns>
+                        <TableColumn fx:id="datumPopravkaColumn" prefWidth="75.0" text="Datum" />
+                      <TableColumn fx:id="nazivPopravkaColumn" prefWidth="75.0" text="Naziv" />
+                      <TableColumn fx:id="opisPopravkaColumn" prefWidth="75.0" text="Opis" />
+                        <TableColumn fx:id="voziloNaPopravkuColumn" prefWidth="75.0" text="Vozilo" />
+                        <TableColumn fx:id="cijenaPopravkaColumn" prefWidth="75.0" text="Cijena (kn)" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox layoutX="312.0" layoutY="4.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#populateMainListView" text="Refresh">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <TextField fx:id="filterPopravciField" maxWidth="110.0" promptText="Filter">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#handleObrisiPopravak" text="-">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="dodajNoviPopravakBttn" mnemonicParsing="false" onAction="#handleDodajNoviPopravak" text="+">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>

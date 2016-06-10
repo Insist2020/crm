@@ -1,0 +1,12 @@
+#clickButton{
+	-fx-font-size: 2.0em;
+	-fx-border-radius: 0;
+}
+
+#textLabel{
+	-fx-font-size: 3.0em;
+	-fx-border-color: rgb(255,255,255);
+	-fx-border-width: 1px;
+	-fx-border-radius: 0px;
+	-fx-alignment: center;
+}

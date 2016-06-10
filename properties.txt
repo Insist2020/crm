@@ -1,0 +1,11 @@
+188.226.140.114
+crm_user
+QOejxrrwxFb97sit
+3306
+crm
+jdbc:mysql://188.226.140.114:3306/crm
+crm_user
+QOejxrrwxFb97sit
+jdbc:h2:tcp://localhost/~/CRMDatabase
+admin
+admin
