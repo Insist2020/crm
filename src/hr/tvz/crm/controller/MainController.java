@@ -2,6 +2,9 @@ package hr.tvz.crm.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +31,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -40,7 +44,7 @@ public class MainController implements Initializable {
 	@FXML
 	private TableView<Popravak> popravciTable;
 	@FXML
-	private TableColumn<Popravak, String> datumPopravkaColumn;
+	private TableColumn<Popravak, Long> datumPopravkaColumn;
 	@FXML
 	private TableColumn<Popravak, String> nazivPopravkaColumn; 
 	@FXML
@@ -58,7 +62,23 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		populateMainListView();
 		
-		datumPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("datum"));
+		PropertyValueFactory<Popravak, Long> datumPopravkaColumnFactory = new PropertyValueFactory<Popravak, Long>("datum");
+		datumPopravkaColumn.setCellValueFactory(datumPopravkaColumnFactory);
+		datumPopravkaColumn.setCellFactory(col -> new TableCell<Popravak, Long>() {
+		    @Override
+		    public void updateItem(Long datum, boolean empty) {
+		        super.updateItem(datum, empty);
+		        if (empty) {
+		            setText(null);
+		        } else {
+		        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		        	String formattedDtm = Instant.ofEpochSecond(datum).atZone(ZoneId.of("GMT+1")).format(formatter);
+		            setText(formattedDtm);
+		        }
+		    }
+		});
+		
+		//datumPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("datum"));
 		nazivPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("naziv")); 
 		opisPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("opis")); 
 		voziloNaPopravkuColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("vozilo"));
