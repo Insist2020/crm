@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
@@ -221,4 +223,91 @@ public class BazaPodataka {
 		return tipovi;
 	}
 
+	public static Map<String, Integer> dohvatiStatistikuPopravaka() throws Exception { 
+		Connection connection = SpojiSeNaBazu();
+		
+		String queryString = "SELECT tip_popravka.tip AS tip, "
+				+ "COUNT(*) AS suma "
+				+ "FROM popravak JOIN "
+				+ "tip_popravka ON popravak.tip = tip_popravka.id "
+				+ "GROUP BY 1";
+		PreparedStatement preparedStatement = connection.prepareStatement(queryString);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		Map<String, Integer> rez = new HashMap<>();
+		
+		/*if (!resultSet.isBeforeFirst() ) {
+			zatvoriVezuSBazom(connection);
+			return rez; 
+		}*/
+		
+		while(resultSet.next()){		
+			int suma = resultSet.getInt("suma"); 
+			String tip = resultSet.getString("tip");
+			
+			rez.put(tip, suma);
+		}
+		
+		zatvoriVezuSBazom(connection);		
+		return rez;
+		
+	}
+
+	public static Map<String, Integer> dohvatiStatistikuBrojaKlijenata() throws Exception { 
+		Connection connection = SpojiSeNaBazu();
+		
+		String queryString = "SELECT YEAR(FROM_UNIXTIME(`tstamp_registracije`)) AS year, "
+				+ "MONTH(FROM_UNIXTIME(`tstamp_registracije`)) AS month, "
+				+ "COUNT(*) AS suma "
+				+ "FROM `klijent` "
+				+ "GROUP BY 1, 2 "
+				+ "ORDER BY 1, 2";
+		PreparedStatement preparedStatement = connection.prepareStatement(queryString);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		Map<String, Integer> rez = new HashMap<>();
+		
+		while(resultSet.next()){		
+			int suma = resultSet.getInt("suma"); 
+			int year = resultSet.getInt("year");
+			int month = resultSet.getInt("month");
+			
+			String key = Integer.toString(year) + " - " + Integer.toString(month);
+			
+			rez.put(key, suma);
+		}
+		
+		zatvoriVezuSBazom(connection);		
+		return rez;
+		
+	}
+
+	public static Map<String, Integer> dohvatiStatistikuBrojaPopravaka() throws Exception { 
+		Connection connection = SpojiSeNaBazu();
+		
+		String queryString = "SELECT YEAR(FROM_UNIXTIME(`tstamp`)) AS year, "
+				+ "MONTH(FROM_UNIXTIME(`tstamp`)) AS month, "
+				+ "COUNT(*) AS suma "
+				+ "FROM `popravak` "
+				+ "GROUP BY 1, 2 "
+				+ "ORDER BY 1, 2";
+		PreparedStatement preparedStatement = connection.prepareStatement(queryString);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		Map<String, Integer> rez = new HashMap<>();
+		
+		while(resultSet.next()){		
+			int suma = resultSet.getInt("suma"); 
+			int year = resultSet.getInt("year");
+			int month = resultSet.getInt("month");
+			
+			String key = Integer.toString(year) + " - " + Integer.toString(month);
+			
+			rez.put(key, suma);
+		}
+		
+		zatvoriVezuSBazom(connection);		
+		return rez;
+		
+	}
 }

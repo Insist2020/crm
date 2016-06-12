@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -25,6 +26,8 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -309,19 +312,65 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void handleStatistika() {
-		try {
+		try {			
 			FXMLLoader loader = new FXMLLoader(); 
 			URL location = StatistikaController.class.getResource("../view/StatistikaView.fxml"); 
 			loader.setLocation(location); 
 			loader.setBuilderFactory(new JavaFXBuilderFactory()); 
 			Parent root = (Parent)loader.load(location.openStream()); 
 			StatistikaController controller = (StatistikaController)loader.getController();
-			Stage stage = new Stage(); 
+			
+			// PIE CHART
+			Map<String, Integer> statistikaPopravaka = BazaPodataka.dohvatiStatistikuPopravaka();
+			ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+			
+			// TODO check if map is empty
+			for (Map.Entry<String, Integer> entry : statistikaPopravaka.entrySet()) { 
+				//System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+				PieChart.Data popravak = new PieChart.Data(entry.getKey(), entry.getValue());
+				pieChartData.add(popravak);
+			}
+			
+			controller.tipPopravkaPieChart.setData(pieChartData);
+			
+			// LINE CHART
+			// klijenti
+			Map<String, Integer> statistikaBrojaKlijenata = BazaPodataka.dohvatiStatistikuBrojaKlijenata();
+	        XYChart.Series klijenti = new XYChart.Series();
+	        klijenti.setName("Broj klijenata");
+	        for (Map.Entry<String, Integer> entry : statistikaBrojaKlijenata.entrySet()) {
+	        	klijenti.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+			}
+	        controller.stopaLineChart.getData().add(klijenti);
+	        
+	        // popravci
+	        Map<String, Integer> statistikaBrojaPopravaka = BazaPodataka.dohvatiStatistikuBrojaPopravaka();
+	        XYChart.Series popravci = new XYChart.Series();
+	        popravci.setName("Broj popravaka");
+	        for (Map.Entry<String, Integer> entry : statistikaBrojaPopravaka.entrySet()) {
+	        	popravci.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+			}
+	        controller.stopaLineChart.getData().add(popravci);
+			
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
 			stage.setTitle("Statistika");
-			stage.setScene(new Scene(root, 600, 300));
-			stage.show(); 
+			stage.setScene(scene);
+			
+			
+			stage.show();
+			
+			/*Scene scene = new Scene(new Group());
+	        stage.setTitle("Imported Fruits");
+	        stage.setWidth(500);
+	        stage.setHeight(500);	        
+
+	        ((Group) scene.getRoot()).getChildren().add(chart);
+	        stage.setScene(scene);
+	        stage.show();*/
+			
 			controller.setDijalogStage(stage);
-		} catch (IOException e) { 
+		} catch (Exception e) { 
 			e.printStackTrace(); 
 		}
 	}
