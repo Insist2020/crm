@@ -16,6 +16,8 @@ import hr.tvz.crm.main.Klijent;
 import hr.tvz.crm.main.Popravak;
 import hr.tvz.crm.main.Tip;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -331,7 +333,7 @@ public class MainController implements Initializable {
 				pieChartData.add(popravak);
 			}
 			
-			controller.tipPopravkaPieChart.setData(pieChartData);
+			controller.tipPopravkaPieChart.setData(pieChartData);			
 			
 			// LINE CHART
 			// klijenti
@@ -375,4 +377,64 @@ public class MainController implements Initializable {
 		}
 	}
 	
+	@FXML
+	public void handleNoviRacun() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			URL location = DodajNoviPopravakController.class.getResource("../view/DodajNoviRacunView.fxml"); 
+			loader.setLocation(location); 
+			loader.setBuilderFactory(new JavaFXBuilderFactory()); 
+			Parent root = (Parent)loader.load(location.openStream()); 
+			DodajNoviRacunController controller = (DodajNoviRacunController)loader.getController();
+
+			//ObservableList<String> options = FXCollections.observableArrayList(listaImenaIPrezimena);
+			List<Klijent> listaKlijenata = new ArrayList<>();
+			
+			try {
+				listaKlijenata = BazaPodataka.dohvatiSveKlijente();				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			ObservableList<Klijent> optionsKlijenti = FXCollections.observableArrayList(listaKlijenata);
+			controller.klijentComboBox.getItems().addAll(optionsKlijenti);
+			controller.klijentComboBox.setValue(this.mainKlijentiListView.getSelectionModel().getSelectedItem());
+			
+			List<Popravak> listaPopravaka = new ArrayList<>();
+			try {
+				// this.mainKlijentiListView.getSelectionModel().getSelectedItem().getId()
+				listaPopravaka = BazaPodataka.dohvatiPopravke(controller.klijentComboBox.getValue().getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ObservableList<Popravak> optionsPopravci = FXCollections.observableArrayList(listaPopravaka);
+			controller.popravakComboBox.getItems().addAll(optionsPopravci);
+			controller.popravakComboBox.setValue(optionsPopravci.get(0));
+			
+			// On change listener
+			controller.klijentComboBox.valueProperty().addListener(new ChangeListener<Klijent>() {
+				@Override
+				public void changed(ObservableValue<? extends Klijent> observable, Klijent oldValue, Klijent newValue) {
+					List<Popravak> listaNovihPopravaka = new ArrayList<>();
+					try {
+						listaNovihPopravaka = BazaPodataka.dohvatiPopravke(newValue.getId());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					ObservableList<Popravak> optionsNoviPopravci = FXCollections.observableArrayList(listaNovihPopravaka);
+					controller.popravakComboBox.getItems().removeAll(controller.popravakComboBox.getItems());
+					controller.popravakComboBox.getItems().addAll(optionsNoviPopravci);
+					controller.popravakComboBox.setValue(optionsNoviPopravci.get(0));
+				}
+			});
+			
+			Stage stage = new Stage(); 
+			stage.setTitle("Generiraj raèun"); 
+			stage.setScene(new Scene(root, 600, 300)); 
+			stage.show();
+			controller.setDijalogStage(stage);
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}
+	}
 }

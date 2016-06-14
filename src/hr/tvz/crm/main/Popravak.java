@@ -1,5 +1,9 @@
 package hr.tvz.crm.main;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 public class Popravak {
 	private 
 		String naziv, opis, vozilo;
@@ -7,12 +11,12 @@ public class Popravak {
 		Double cijena;
 		Long datum;
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Popravak [naziv=" + naziv + ", opis=" + opis + ", vozilo="
 				+ vozilo + ", id=" + id + ", cijena=" + cijena
 				+ ", idKlijent=" + idKlijent + ", datum=" + datum + "]";
-	}
+	}*/
 
 	public Popravak(int id, String naziv, String opis, String vozilo, Double cijena, int idKlijent, Long datum, int tip) {
 		this.id = id;
@@ -32,6 +36,13 @@ public class Popravak {
 		this.cijena = cijena;
 		this.idKlijent = idKlijent;
 		this.tip = tip;
+	}
+	
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		String formattedDtm = Instant.ofEpochSecond(datum).atZone(ZoneId.of("GMT+1")).format(formatter);
+		return formattedDtm + " | " + naziv + ", " + vozilo + ", " + cijena;
 	}
 	
 	public int getId() {

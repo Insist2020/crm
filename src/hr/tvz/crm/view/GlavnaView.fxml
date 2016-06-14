@@ -26,6 +26,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleStatistika" text="Prikaži statistiku" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Računi">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleNoviRacun" text="Novi" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
