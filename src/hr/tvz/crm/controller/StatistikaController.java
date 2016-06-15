@@ -16,6 +16,6 @@ public class StatistikaController {
 	
 	public void setDijalogStage(Stage dijalogStage) {
         this.dijalogStage = dijalogStage;
-    }	
+    }
 	
 }
