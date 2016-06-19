@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
@@ -265,7 +266,7 @@ public class BazaPodataka {
 		PreparedStatement preparedStatement = connection.prepareStatement(queryString);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		
-		Map<String, Integer> rez = new HashMap<>();
+		Map<String, Integer> rez = new TreeMap<>();
 		
 		while(resultSet.next()){		
 			int suma = resultSet.getInt("suma"); 
@@ -294,7 +295,7 @@ public class BazaPodataka {
 		PreparedStatement preparedStatement = connection.prepareStatement(queryString);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		
-		Map<String, Integer> rez = new HashMap<>();
+		Map<String, Integer> rez = new TreeMap<>();
 		
 		while(resultSet.next()){		
 			int suma = resultSet.getInt("suma"); 
