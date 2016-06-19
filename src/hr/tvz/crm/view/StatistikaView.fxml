@@ -8,16 +8,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<FlowPane columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.crm.controller.StatistikaController">
-   <children>
-      <LineChart fx:id="stopaLineChart" title="Stopa rasta klijenata/popravaka">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
-      <PieChart fx:id="tipPopravkaPieChart" title="Tipovi popravaka" />
-   </children>
-</FlowPane>
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.crm.controller.StatistikaController">
+   <tabs>
+      <Tab text="Stopa rasta">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <LineChart fx:id="stopaLineChart">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </LineChart>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Tipovi popravaka">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <PieChart fx:id="tipPopravkaPieChart" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
