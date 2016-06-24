@@ -39,13 +39,14 @@
          <children>
             <HBox>
                <children>
-                  <Label text="Autor: Tomislav Bradač" />
-                  <Label text=" | " />
-                  <Label text="Mentor: dipl. ing. Aleksander Radovan" />
+                  <Label text="info@car-mechanic.hr">
+                     <HBox.margin>
+                        <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
-         </children>
-      </Pane>
+         </children></Pane>
    </bottom>
    <center>
       <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">

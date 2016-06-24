@@ -179,7 +179,7 @@ public class DodajNoviRacunController {
     			.setMarginRight(15)
 		);
     	table2.addCell(new Cell().add(
-    			new Paragraph(popravak.getCijena().toString())
+    			new Paragraph(popravak.getCijena().toString() + " kn")
     			.setTextAlignment(TextAlignment.LEFT)
     			.setFont(font))
     			.setBorder(Border.NO_BORDER)
