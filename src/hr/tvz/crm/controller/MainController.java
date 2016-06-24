@@ -353,6 +353,15 @@ public class MainController implements Initializable {
 	        	popravci.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
 			}
 	        controller.stopaLineChart.getData().add(popravci);
+	        
+	        // BAR CHART
+	        Map<String, Float> statistikaPrometa = BazaPodataka.dohvatiStatistikuPrometa();
+	        XYChart.Series promet = new XYChart.Series();
+	        promet.setName("Promet");
+	        for (Map.Entry<String, Float> entry : statistikaPrometa.entrySet()) {
+	        	promet.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+			}
+	        controller.prometBarChart.getData().add(promet);
 			
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();

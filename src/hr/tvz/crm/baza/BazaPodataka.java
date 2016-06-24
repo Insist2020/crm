@@ -308,7 +308,35 @@ public class BazaPodataka {
 		}
 		
 		zatvoriVezuSBazom(connection);		
-		return rez;
-		
+		return rez;		
 	}
+	
+	public static Map<String, Float> dohvatiStatistikuPrometa() throws Exception { 
+		Connection connection = SpojiSeNaBazu();
+		
+		String queryString = "SELECT YEAR(FROM_UNIXTIME(`tstamp`)) AS year, "
+				+ "MONTH(FROM_UNIXTIME(`tstamp`)) AS month, "
+				+ "SUM(cijena) AS suma "
+				+ "FROM `popravak` "
+				+ "GROUP BY 1, 2 "
+				+ "ORDER BY 1, 2";
+		PreparedStatement preparedStatement = connection.prepareStatement(queryString);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		Map<String, Float> rez = new TreeMap<>();
+		
+		while(resultSet.next()){		
+			Float suma = resultSet.getFloat("suma"); 
+			int year = resultSet.getInt("year");
+			int month = resultSet.getInt("month");
+			
+			String key = Integer.toString(year) + " - " + Integer.toString(month);
+			
+			rez.put(key, suma);
+		}
+		
+		zatvoriVezuSBazom(connection);		
+		return rez;		
+	}
+	
 }

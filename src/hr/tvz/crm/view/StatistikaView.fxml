@@ -35,5 +35,21 @@
             </AnchorPane>
          </content>
       </Tab>
+      <Tab text="Promet">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <BarChart fx:id="prometBarChart">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
    </tabs>
 </TabPane>
