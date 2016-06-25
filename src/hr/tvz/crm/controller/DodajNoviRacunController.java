@@ -14,6 +14,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.kernel.font.PdfFont;
@@ -27,6 +28,7 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.signatures.PdfSignature;
 
 import hr.tvz.crm.main.Klijent;
 import hr.tvz.crm.main.Popravak;
@@ -218,7 +220,7 @@ public class DodajNoviRacunController {
         // CLOSE DOCUMENT
     	document.close();
     	
-    	//signPDF("resources/cert/tomo-cert.p12", "output/pdf/" + klijent.getIme() + ".pdf", "output/pdf/signed/" + klijent.getIme() + ".pdf");
+    	signPDF("resources/cert/tomo-cert.p12", "output/pdf/" + klijent.getIme() + ".pdf", "output/pdf/signed/" + klijent.getIme() + ".pdf");
     	
     	// GENERATE CONFIRMATION POPUP
     	Alert alert = new Alert(AlertType.INFORMATION);
@@ -287,8 +289,7 @@ public class DodajNoviRacunController {
 	            sap.setCrypto(privateKey, certificateChain, null, com.lowagie.text.pdf.PdfSignatureAppearance.WINCER_SIGNED);
 	            // sap.setReason("I'm the author");
 	            // sap.setLocation("Lisbon");
-	            // sap.setVisibleSignature(new Rectangle(100, 100, 200, 200), 1,
-	            // null);
+	            // sap.setVisibleSignature(new Rectangle(100, 100, 200, 200), 1, null);
 	            stp.close();
 	        } catch (Exception e) {
 	            System.err
