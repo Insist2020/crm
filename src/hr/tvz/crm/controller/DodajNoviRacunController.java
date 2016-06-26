@@ -14,7 +14,6 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
-import java.util.Properties;
 
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.kernel.font.PdfFont;
@@ -28,7 +27,6 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.signatures.PdfSignature;
 
 import hr.tvz.crm.main.Klijent;
 import hr.tvz.crm.main.Popravak;

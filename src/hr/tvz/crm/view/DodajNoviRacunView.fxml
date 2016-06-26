@@ -18,7 +18,6 @@
     <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label alignment="BASELINE_LEFT" prefHeight="54.0" prefWidth="102.0" text="Novi popravak:" wrapText="true">
@@ -37,25 +36,12 @@
             <Insets left="20.0" />
          </padding>
       </Label>
-      <Label text="Bilješka" GridPane.rowIndex="3">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <padding>
-            <Insets left="20.0" />
-         </padding>
-      </Label>
-      <TextField fx:id="nazivField" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets right="20.0" />
-         </GridPane.margin>
-      </TextField>
-      <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#handleOk" text="Generiraj račun" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#handleOk" text="Generiraj račun" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="30.0" right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="odustaniButton" mnemonicParsing="false" onAction="#handleCancel" text="Odustani" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button fx:id="odustaniButton" mnemonicParsing="false" onAction="#handleCancel" text="Odustani" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="30.0" right="130.0" />
          </GridPane.margin>
