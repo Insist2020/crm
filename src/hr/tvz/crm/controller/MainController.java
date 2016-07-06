@@ -2,6 +2,7 @@ package hr.tvz.crm.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -88,11 +89,41 @@ public class MainController implements Initializable {
 		nazivPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("naziv")); 
 		opisPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("opis")); 
 		voziloNaPopravkuColumn.setCellValueFactory(new PropertyValueFactory<Popravak, String>("vozilo"));
-		cijenaPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, Double>("cijena"));
+		//cijenaPopravkaColumn.setCellValueFactory(new PropertyValueFactory<Popravak, Double>("cijena"));
+		PropertyValueFactory<Popravak, Double> cijenaPopravkaColumnFactory = new PropertyValueFactory<Popravak, Double>("cijena");
+		cijenaPopravkaColumn.setCellValueFactory(cijenaPopravkaColumnFactory);
+		cijenaPopravkaColumn.setCellFactory(col -> new TableCell<Popravak, Double>() {
+		    @Override
+		    public void updateItem(Double cijena, boolean empty) {
+		        super.updateItem(cijena, empty);
+		        if (empty) {
+		            setText(null);
+		        } else {		        	
+		        	//String formattedDtm = Instant.ofEpochSecond(datum).atZone(ZoneId.of("GMT+1")).format(formatter);
+		            //setText(formattedDtm);
+		        	String okCijena = twoDec(cijena);
+		        	setText(okCijena + " kn");
+		        }
+		    }
+		});
 		
 		populatePopravciTable();
 	}
 	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
+	}
+	
+	public static String twoDec(double num){
+		 DecimalFormat df = new DecimalFormat("#.00");
+		 return df.format(num);
+	}
+	 	
 	public void populateMainListView() {
 		List<Klijent> listaKlijenata = new ArrayList<>();
 		try {

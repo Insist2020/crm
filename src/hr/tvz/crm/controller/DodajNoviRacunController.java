@@ -12,7 +12,11 @@ import java.security.PrivateKey;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.NoSuchElementException;
 
 import com.itextpdf.io.font.PdfEncodings;
@@ -178,8 +182,11 @@ public class DodajNoviRacunController {
     			.setBorder(Border.NO_BORDER)
     			.setMarginRight(15)
 		);
+    	
+    	DecimalFormat df = new DecimalFormat("#.00");
+		    	
     	table2.addCell(new Cell().add(
-    			new Paragraph(popravak.getCijena().toString() + " kn")
+    			new Paragraph(df.format(popravak.getCijena()).toString() + " kn")
     			.setTextAlignment(TextAlignment.LEFT)
     			.setFont(font))
     			.setBorder(Border.NO_BORDER)
@@ -191,7 +198,7 @@ public class DodajNoviRacunController {
         Table footer = new Table(new float[]{1, 1});
         footer.setWidthPercent(100);
         
-        LocalDateTime currentTime = LocalDateTime.now();		
+        //LocalDateTime currentTime = LocalDateTime.now();		
         
         Cell c = new Cell().add(
     			new Paragraph("Ovaj dokument je digitalno potpisan.")
@@ -199,7 +206,11 @@ public class DodajNoviRacunController {
     			.setFont(font))
     			.setBorder(Border.NO_BORDER)
     			.setMarginRight(15);
-        c.add(new Paragraph(currentTime.toLocalDate().toString())
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.");
+        Date date = new Date();
+                
+        c.add(new Paragraph("Zagreb, " + dateFormat.format(date))
     			.setTextAlignment(TextAlignment.LEFT)
     			.setFont(font));
 		

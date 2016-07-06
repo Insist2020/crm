@@ -1,5 +1,6 @@
 package hr.tvz.crm.main;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -40,9 +41,10 @@ public class Popravak {
 	
 	@Override
 	public String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 		String formattedDtm = Instant.ofEpochSecond(datum).atZone(ZoneId.of("GMT+1")).format(formatter);
-		return formattedDtm + " | " + naziv + ", " + vozilo + ", " + cijena;
+		DecimalFormat df = new DecimalFormat("#.00");
+		return formattedDtm + " | " + naziv + ", " + vozilo + ", " + df.format(cijena);
 	}
 	
 	public int getId() {

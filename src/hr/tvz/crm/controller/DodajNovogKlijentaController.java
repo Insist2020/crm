@@ -1,5 +1,8 @@
 package hr.tvz.crm.controller;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import hr.tvz.crm.baza.BazaPodataka;
 import hr.tvz.crm.main.Klijent;
 import javafx.fxml.FXML;
@@ -75,6 +78,17 @@ public class DodajNovogKlijentaController {
         dijalogStage.close();
     }
 	
+	public static boolean isValidEmailAddress(String email) {
+	   boolean result = true;
+	   try {
+	      InternetAddress emailAddr = new InternetAddress(email);
+	      emailAddr.validate();
+	   } catch (AddressException ex) {
+	      result = false;
+	   }
+	   return result;
+	}
+	
 	private boolean isInputValid() {
         String errorMessage = "";
         
@@ -91,34 +105,9 @@ public class DodajNovogKlijentaController {
         if (mobitelField.getText() == null || mobitelField.getText().length() == 0) {
             errorMessage += "Kontakt broj nije ispravan!\n"; 
         }
-        if (emailField.getText() == null || emailField.getText().length() == 0) {
+        if (emailField.getText() == null || emailField.getText().length() == 0 || !isValidEmailAddress(emailField.getText())) {
             errorMessage += "E-mail nije ispravan!\n"; 
         }
-
-        /*
-        if (emailField.getText() == null || emailField.getText().length() == 0) {
-            errorMessage += "No valid e-mail!\n"; 
-        } else {
-            // try to parse the postal code into an int
-            try {
-                Integer.parseInt(postalCodeField.getText());
-            } catch (NumberFormatException e) {
-                errorMessage += "No valid postal code (must be an integer)!\n"; 
-            }
-        }
-        
-        if (cityField.getText() == null || cityField.getText().length() == 0) {
-            errorMessage += "No valid city!\n"; 
-        }
-
-        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
-            errorMessage += "No valid birthday!\n";
-        } else {
-            if (!CalendarUtil.validString(birthdayField.getText())) {
-                errorMessage += "No valid birthday. Use the format yyyy-mm-dd!\n";
-            }
-        }
-        */
 
         if (errorMessage.length() == 0) {
             return true;
